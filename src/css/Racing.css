@@ -1,0 +1,29 @@
+.racing-section {
+  background-color: #e10600; /* Rojo Ferrari */
+  padding: 50px 0;
+}
+
+.racing-card {
+  background-color: #000; /* Fondo negro */
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.racing-card img {
+  width: 100%;        /* que ocupe todo el ancho de la card */
+  height: 250px;      /* altura fija, ajustable */
+  object-fit: cover;  /* recorta y mantiene proporción */
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.racing-card .card-body {
+  padding: 20px;
+}
+
+.racing-card .card-title,
+.racing-card .card-text {
+  color: #fff;
+  font-weight: 600;
+}

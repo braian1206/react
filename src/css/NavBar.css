@@ -1,0 +1,41 @@
+/* Fondo negro Ferrari */
+.ferri-navbar {
+  background-color: #000 !important;
+}
+
+/* Links blancos con hover rojo y subrayado animado */
+.ferri-navbar .nav-link {
+  color: #fff !important;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+  margin-right: 1rem;
+}
+
+.ferri-navbar .nav-link::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: -100%;
+  background-color: #e10600; /* rojo Ferrari */
+  transition: left 0.3s ease;
+}
+
+.ferri-navbar .nav-link:hover::after {
+  left: 0;
+}
+
+.ferri-navbar .nav-link:hover {
+  color: #e10600 !important;
+}
+
+/* Botón hamburguesa */
+.navbar-toggler {
+  border-color: #e10600 !important;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28225,6,0,1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
+}
