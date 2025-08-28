@@ -2,7 +2,7 @@ import React from "react";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import CardWidget from "./CardWidget";
-import "../css/NavBar.css"; // CSS custom Ferrari + subrayado
+import "../css/NavBar.css"; 
 
 const NavBar = () => {
   return (
@@ -17,7 +17,7 @@ const NavBar = () => {
           />
         </Navbar.Brand>
 
-        {/* Botón hamburguesa */}
+       
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
         <Navbar.Collapse id="basic-navbar-nav">
