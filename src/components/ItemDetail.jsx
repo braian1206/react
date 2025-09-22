@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import ItemCount from "./ItemCount";
+import { CartContext } from "../context/CartContext";
+import { Link } from "react-router-dom";
 
 const ItemDetail = ({ detalle }) => {
+const [purchase, setPurchase]= useState(false)
+const {addItem}=useContext(CartContext)  
+    const onAdd = (cantidad) => {
+      setPurchase(true)
+      addItem(detalle, cantidad) 
+    }
+
   return (
     <div className="d-flex justify-content-center mt-4">
       <Card style={{ width: "30rem" }}>
@@ -16,7 +26,7 @@ const ItemDetail = ({ detalle }) => {
           <Card.Text>
             <strong>Stock disponible:</strong> {detalle.stock}
           </Card.Text>
-          <Button variant="success">Agregar al carrito</Button>
+          {purchase ? <Link to ='/cart' className="btm btn-dark">Ir al carrito</Link>:<ItemCount stock={detalle.stock} onAdd={onAdd}/>}
         </Card.Body>
       </Card>
     </div>

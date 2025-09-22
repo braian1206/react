@@ -1,20 +1,54 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react'
 import ItemDetail from './ItemDetail'
-import { getItem } from "../mock/AsyncMock";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from 'react-router-dom'
+import LoaderComponent from './LoaderComponent'
+import { doc, getDoc } from 'firebase/firestore'
+import { db } from '../service/firebase'
+
+const ItemDetailContainer = () => {
+const [detalle, setDetalle]= useState({})
+const [cargando, setCargando] = useState(false)
+const [invalid, setInvalid] = useState(null)
+const {id} = useParams()
 
 
-    const ItemDetailContainer = () =>{
-        const [detalle, setDetalle]= useState({})
-        const {id} = useParams()
-        useEffect(()=>{
-            getItem(id)
-            .then((res)=> setDetalle(res))
-            .catch((error)=> console.log(error))
-        },[id])
+//FIREBASE
+  useEffect(()=>{
+    setCargando(true)
+    //conectar con nuesta colleccion y crear una referencia
+    const docRef = doc(db, "productos", id)
+    //traer el documento
+    getDoc(docRef)
+    .then((res)=> {
+      if(res.data()){
+        setDetalle({id: res.id, ...res.data()})
+      }else{
+        setInvalid(true)
+      }
+    })
+    .catch((error)=> console.log(error))
+    .finally(()=> setCargando(false))
+  },[id])
 
-        return (
-            <div><ItemDetail detalle={detalle}/></div>
-        )
+
+    if(invalid){
+      return(
+        <div>
+           <h1>El producto no existe! 😭</h1>
+          <Link to='/' className='btn btn-dark'> Ir a home</Link>
+        </div>
+      )
     }
-    export default ItemDetailContainer
+
+  return (
+    <>
+    {
+      cargando 
+      ? <LoaderComponent/>
+      : <ItemDetail detalle={detalle}/>
+    }
+    </>
+  )
+}
+
+export default ItemDetailContainer

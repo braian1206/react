@@ -1,31 +1,45 @@
-import "../css/ItemListContainer.css"
-import { useEffect, useState } from "react"
-import { getProducts } from "../mock/AsyncMock"
-import Itemlist from "./ItemList"
-import { useParams } from "react-router-dom"
+import React, { useEffect, useState } from 'react';
+import Item from './Item';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../service/firebase';
+import LoaderComponent from './LoaderComponent';
 
-const ItemListContainer = ({mensaje}) => {
-    const [data, setData]= useState([])
-    const {category} = useParams()
+const ItemListContainer = ({ mensaje }) => {
+  const [productos, setProductos] = useState([]);
+  const [cargando, setCargando] = useState(true);
 
-    useEffect(()=>{
-        getProducts()
-        .then ((res)=>{
-            if(category){
-                setData(res.filter((item)=> item.category === category))
-            }else{
-                setData(res)
-            }
-        })
-        .catch ((error)=> console.error(error))
-    },[category])
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setCargando(true);
+      try {
+        const querySnapshot = await getDocs(collection(db, "productos"));
+        const items = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setProductos(items);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setCargando(false);
+      }
+    };
 
-    console.log(data)
-    return(
-        <div className="texto">
-            <h1>{mensaje}{category && <span style={{textTransform: 'capitalize'}}>{category}</span>}</h1>
-            <Itemlist data={data}/>
-        </div>
-    )
-}
-export default ItemListContainer
+    fetchProducts();
+  }, []);
+
+  if (cargando) return <LoaderComponent />;
+
+  return (
+    <div>
+      <h1>{mensaje}</h1>
+      <div className="d-flex flex-wrap gap-3">
+        {productos.map(prod => (
+          <Item key={prod.id} prod={prod} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default ItemListContainer;
