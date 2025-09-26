@@ -16,12 +16,29 @@ const [cont, setCont] = useState(1)
 
     return(
        <div> 
-        <div>
-            <button onClick={restar}>-</button>
-            <span>{cont}</span>
-            <button onClick={sumar}>+</button>
-        </div>
-        <button disabled={stock === 0 || cont === 0} onClick={()=> onAdd(cont)}>Comprar</button>
+      <div className="d-flex align-items-center gap-2">
+            <button
+                onClick={restar}
+                className="btn btn-outline-primary rounded-circle"
+                style={{ width: "40px", height: "40px", fontWeight: "bold" }}
+            >
+                -
+            </button>
+
+            <span className="fw-bold mx-2" style={{ minWidth: "30px", textAlign: "center" }}>
+                {cont}
+            </span>
+
+            <button
+                onClick={sumar}
+                className="btn btn-outline-primary rounded-circle"
+                style={{ width: "40px", height: "40px", fontWeight: "bold" }}
+            >
+                +
+            </button>
+            </div>
+
+        <button className="btn btn-outline-primary" disabled={stock === 0 || cont === 0} onClick={()=> onAdd(cont)}>Comprar</button>
         </div>
     )
 

@@ -34,7 +34,7 @@ const {id} = useParams()
     if(invalid){
       return(
         <div>
-           <h1>El producto no existe! 😭</h1>
+           <h1>El producto no existe! </h1>
           <Link to='/' className='btn btn-dark'> Ir a home</Link>
         </div>
       )

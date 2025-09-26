@@ -8,6 +8,7 @@ import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import Racing from './components/Racing';
 import { CartProvider } from './context/CartContext';
 import CartContainer from './components/CartContainer';
+import Checkout from './components/Checkout';
 
 function App() {
 
@@ -19,8 +20,9 @@ function App() {
       <Route path='/' element={<ItemListContainer mensaje = "Ferrari"/>}/>
       <Route path='/categories/:category' element={<ItemListContainer mensaje = ""/>}/>
       <Route path='/item/:id' element={<ItemDetailContainer/>}/>
-      <Route path="/categories/racing" element={<Racing />} />
+      <Route path='/categories/racing' element={<Racing />} />
       <Route path='/cart' element={<CartContainer/>}/>
+      <Route path='/checkout' element={<Checkout/>}/>
     </Routes>
     </CartProvider>
     </BrowserRouter>

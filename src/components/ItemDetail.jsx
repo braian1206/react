@@ -26,7 +26,7 @@ const {addItem}=useContext(CartContext)
           <Card.Text>
             <strong>Stock disponible:</strong> {detalle.stock}
           </Card.Text>
-          {purchase ? <Link to ='/cart' className="btm btn-dark">Ir al carrito</Link>:<ItemCount stock={detalle.stock} onAdd={onAdd}/>}
+          {purchase ? <Link to ='/cart' className="btn btn-dark">Ir al carrito</Link>:<ItemCount stock={detalle.stock} onAdd={onAdd}/>}
         </Card.Body>
       </Card>
     </div>
