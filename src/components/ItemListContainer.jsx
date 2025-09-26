@@ -48,7 +48,7 @@ const ItemListContainer = ({ mensaje }) => {
       <div key={prod.id} className="col-12 col-sm-6 col-md-4 col-lg-3">
         <div className="card h-100 shadow-sm">
           <img
-            src={prod.img} // asegúrate de tener la propiedad imagen
+            src={prod.img} 
             className="card-img-top"
             alt={prod.name}
             style={{ height: "200px", objectFit: "cover" }}
